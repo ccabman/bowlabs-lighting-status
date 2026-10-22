@@ -1,4 +1,4 @@
-# BowLabs Lighting Status — private installation candidate 0.1.0
+# BowLabs Lighting Status — installation candidate 0.1.0
 
 A separate Home Assistant custom integration for an explicitly approved, read-only
 summary of BowLighting's existing local diagnostics. It does not replace
@@ -6,15 +6,15 @@ BowLighting or change the Mac-only `bowlabs_status` integration.
 
 This candidate has been installed and tested only in disposable HA 2026.10.2 on
 Python 3.14 with synthetic sensor entities. No household installation or service
-restart is authorized by this artifact. This new domain now passes its own Linux
-CI and official hassfest validation. Full HACS validation is blocked: the official
-action refuses this private repository. It has not been made public.
+restart is authorized by this artifact. The standalone repository is public with
+the owner's approval. Linux CI, official hassfest and all ten official HACS action
+checks pass, with no ignored checks.
 
-Validated code: `8f67d7291231106222853a0fdd7e2c646736d6c0` in
-[run 39716229408](https://github.com/ccabman/bowlabs-lighting-status/actions/runs/39716229408).
-The aggregate workflow is red solely because HACS rejects private repositories;
-the Linux and hassfest jobs pass. No HACS success is claimed. The manifest now
-points to this standalone repository rather than the separate Mac pilot.
+Validated code: `40ca0e1e778ab1987931138a8ff09c973f8688f2` in
+[green run 39717684550](https://github.com/ccabman/bowlabs-lighting-status/actions/runs/39717684550).
+The Linux job passes five pure tests, 29 native HA assertions and a clean boot
+after entry/code removal. HACS action success does not mean inclusion in the
+HACS default catalog. No household installation or GitHub release was performed.
 
 ## Scope and approval
 
@@ -97,7 +97,7 @@ Total: **5 pure tests and 29 native HA assertions**, plus visual end-to-end setu
 Ruff and formatting checks pass. The same 29 native assertions also pass on Linux,
 followed by candidate code removal and a clean HA boot with the synthetic lighting
 source unchanged. The five pure tests also pass on Linux. Official hassfest passes;
-full HACS remains unvalidated due to private repository visibility.
+all ten full HACS action checks pass after publication and brand/topic fixes.
 
 Open <http://127.0.0.1:18168/config/integrations> while the lab runs. Test-only
 administrator: `lighting-admin` / `bowlabs-synthetic-admin`; viewer:
@@ -120,14 +120,15 @@ python tools/check_linux.py
 ```
 
 The official HACS action is enabled with no ignored checks and comments disabled.
-It stops at the private-repository prerequisite; no result is bypassed or presented
-as a pass. Publication requires separate approval. A household installation also
+All ten checks pass; no validator is bypassed. The required BowLabs brand assets
+are bundled, and repository topics are set. Optional category metadata is omitted
+for compatibility with the supported hassfest schema. A household installation
 still requires an agreed backup, sensor selection and full HA restart boundary.
 
 ## Package boundaries
 
 The install ZIP contains only `custom_components/bowlabs_lighting_status/`.
-The private source ZIP additionally includes this guide, test tools and the clearly
+The source ZIP additionally includes this guide, test tools and the clearly
 marked fake fixture. It excludes work directories, credentials, private keys,
-caches, sibling applications and household data. The source is not published.
+caches, sibling applications and household data. Only this standalone integration source is public.
 The public status-integration repository and its existing release remain unchanged.
