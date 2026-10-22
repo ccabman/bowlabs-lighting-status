@@ -1,0 +1,72 @@
+{
+  "title": "BowLabs Lighting Status",
+  "config": {
+    "step": {
+      "select": {
+        "title": "Choose BowLighting diagnostics",
+        "description": "Select zone Status sensors and the Active alerts sensor. No lights, holds or settings will be changed.",
+        "data": {
+          "zones": "Zone status sensors",
+          "alerts": "Active alerts sensor"
+        }
+      },
+      "approve": {
+        "title": "Approve read-only lighting status",
+        "description": "Scope: {scope}\n\nSelected sensors: {entities}\n\nApproval persists until revoked in integration options. It permits local diagnostic reads only. No network, lights, audio, picture frame or Music access.",
+        "data": {
+          "approve": "Approve these read-only observations"
+        }
+      }
+    },
+    "error": {
+      "invalid_selection": "Select 1\u201332 registered BowLighting zone Status sensors and its registered Active alerts sensor."
+    },
+    "abort": {
+      "selection_changed": "The selection changed. Start again.",
+      "approval_required": "Explicit approval is required.",
+      "single_instance_allowed": "Already configured. Use integration options to review or revoke."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Lighting status permission",
+        "data": {
+          "action": "Action"
+        },
+        "data_description": {
+          "action": "Revoke existing approval, or review a new sensor selection."
+        }
+      },
+      "select": {
+        "title": "Choose BowLighting diagnostics",
+        "description": "Select zone Status sensors and the Active alerts sensor. No lights, holds or settings will be changed.",
+        "data": {
+          "zones": "Zone status sensors",
+          "alerts": "Active alerts sensor"
+        }
+      },
+      "approve": {
+        "title": "Approve read-only lighting status",
+        "description": "Scope: {scope}\n\nSelected sensors: {entities}\n\nApproval persists until revoked in integration options. It permits local diagnostic reads only. No network, lights, audio, picture frame or Music access.",
+        "data": {
+          "approve": "Approve these read-only observations"
+        }
+      },
+      "revoke": {
+        "title": "Revoke read-only approval",
+        "description": "Stops diagnostic reads and clears the summary. Revocation remains after restart. BowLighting itself continues unchanged.",
+        "data": {
+          "confirm": "Revoke approval"
+        }
+      }
+    },
+    "abort": {
+      "selection_changed": "The selection changed. Start again.",
+      "approval_required": "Confirmation is required."
+    },
+    "error": {
+      "invalid_selection": "Select registered BowLighting diagnostic sensors."
+    }
+  }
+}
