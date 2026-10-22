@@ -6,10 +6,15 @@ BowLighting or change the Mac-only `bowlabs_status` integration.
 
 This candidate has been installed and tested only in disposable HA 2026.10.2 on
 Python 3.14 with synthetic sensor entities. No household installation or service
-restart is authorized by this artifact. Linux CI, hassfest and full HACS validation
-have not been run for this new domain. Earlier checks of `bowlabs_status` do not
-cover it. The manifest currently points to the existing BowLabs umbrella repository;
-a dedicated documentation/release location must be chosen before publication.
+restart is authorized by this artifact. This new domain now passes its own Linux
+CI and official hassfest validation. Full HACS validation is blocked: the official
+action refuses this private repository. It has not been made public.
+
+Validated code: `8f67d7291231106222853a0fdd7e2c646736d6c0` in
+[run 39716229408](https://github.com/ccabman/bowlabs-lighting-status/actions/runs/39716229408).
+The aggregate workflow is red solely because HACS rejects private repositories;
+the Linux and hassfest jobs pass. No HACS success is claimed. The manifest now
+points to this standalone repository rather than the separate Mac pilot.
 
 ## Scope and approval
 
@@ -89,13 +94,35 @@ The UI was then used to reinstall the candidate, approve and revoke it visually.
 With that entry present, `tools/check_identity.py` passes six further assertions
 for registry rename/identity protection and restores the source and revoked state.
 Total: **5 pure tests and 29 native HA assertions**, plus visual end-to-end setup.
-Ruff and formatting checks pass. No Linux/HACS success is claimed.
+Ruff and formatting checks pass. The same 29 native assertions also pass on Linux,
+followed by candidate code removal and a clean HA boot with the synthetic lighting
+source unchanged. The five pure tests also pass on Linux. Official hassfest passes;
+full HACS remains unvalidated due to private repository visibility.
 
 Open <http://127.0.0.1:18168/config/integrations> while the lab runs. Test-only
 administrator: `lighting-admin` / `bowlabs-synthetic-admin`; viewer:
 `suite-viewer` / `bowlabs-synthetic-viewer`. These belong only to this loopback lab;
 never reuse them. Private runtime tokens stay mode 600 under the mode-700 lab
 directory and are excluded from the install and source ZIPs.
+
+## Portable Linux CI
+
+The CI runner preinstalls HA's pinned default/frontend/auth dependencies before
+enabling the runtime network/process guard. It then starts a fresh test HA, runs
+all native checks, restarts to prove revocation persistence, removes the entry and
+candidate code, and boots again. All files live in a temporary directory. The
+fixture and guard are standalone; no sibling workspace source is uploaded.
+
+```sh
+python tools/prepare_linux.py
+python tools/test.py
+python tools/check_linux.py
+```
+
+The official HACS action is enabled with no ignored checks and comments disabled.
+It stops at the private-repository prerequisite; no result is bypassed or presented
+as a pass. Publication requires separate approval. A household installation also
+still requires an agreed backup, sensor selection and full HA restart boundary.
 
 ## Package boundaries
 
