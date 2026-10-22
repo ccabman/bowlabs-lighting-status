@@ -57,6 +57,9 @@ def main():
             subprocess.run(
                 [sys.executable, str(staged / "tools/check_install.py")], check=True
             )
+            subprocess.run(
+                [sys.executable, str(staged / "tools/check_identity.py")], check=True
+            )
             stop()
             start()
             subprocess.run(
@@ -89,7 +92,7 @@ def main():
                 lab / "config/custom_components/bowlabs_lighting_status"
             ).exists()
             print(
-                "PASS Linux: 16 install/revoke + 7 restart/reapprove/remove checks; "
+                "PASS Linux: 16 install/revoke + 6 identity + 7 restart/remove checks; "
                 "code removal and clean boot; synthetic source unchanged."
             )
         finally:
