@@ -15,6 +15,7 @@ jobs:
         with:
           python-version: '3.14'
       - run: python -m pip install 'homeassistant==2026.10.2' 'ruff==0.17.1'
+      - run: python tools/prepare_linux.py
       - run: python tools/test.py
       - run: ruff check . --select E,F,I
       - run: ruff format --check .
