@@ -1,10 +1,6 @@
 {
   "domain": "bowlabs_lighting_status",
   "name": "BowLabs Lighting Status",
-  "categories": [
-    "helpers.calculate_value",
-    "lighting"
-  ],
   "codeowners": [
     "@ccabman"
   ],
